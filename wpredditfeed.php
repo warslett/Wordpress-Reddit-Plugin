@@ -12,4 +12,17 @@ Author URI: http://www.williamarslett.com
 function super_plugin_install(){
     //Do some installation work
 }
+
 register_activation_hook(__FILE__,'super_plugin_install');
+
+function feed_insert($content)
+{
+  if (preg_match('/\{REDDIT*.+\}/',$content))
+    {
+      $feed_output = "Testing Testing";
+      $content = preg_replace('/\{REDDIT*.+\}/',$feed_output,$content);
+    }
+  return $content;
+}
+
+add_filter('the_content','feed_insert');
