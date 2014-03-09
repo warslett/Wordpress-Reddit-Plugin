@@ -2,8 +2,10 @@
 
 /**
  * Description of RedditFeed
+ * 
+ * Class describing a feed object which loads headlines from reddit
  *
- * @author william
+ * @author William Arslett <wia2@aber.ac.uk>
  */
 include 'RedditHeadline.php';
 
@@ -47,6 +49,7 @@ class RedditFeed {
 
     public function getHeadlines() {
 
+        //output feed as in formatted HTML
         $output = "<ol>";
 
         foreach ($this->headlines as $headline) {

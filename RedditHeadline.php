@@ -1,15 +1,11 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of RedditHeadline
  *
- * @author william
+ * Class defining a reddit headline object and methods for extracting the data
+ * 
+ * @author William Arslett <wia2@aber.ac.uk>
  */
 class RedditHeadline {
     
@@ -36,6 +32,9 @@ class RedditHeadline {
                 item(1)->getAttributeNode("href")->
                 value;
         
+        /* if the URL is relative as opposed to absolute we have to prefix the
+         * reddit url so that it links correctly on this site.
+         */
         if (!preg_match('/^(http|https)/', $url)) {
             $url = "http://www.reddit.com" . $url;
         }
