@@ -13,29 +13,34 @@
  */
 class RedditHeadline {
     
-    private $label;
-    private $URL;
+    private $redditNode;
 
-    public function __construct(
-            $label,
-            $URL
-            ) {
+    public function __construct($redditNode) {
         
-        $this->label = $label;
-        $this->URL = $URL;
+        $this->redditNode = $redditNode;
         
     }
     
     public function getLabel(){
         
-        return $this->label;
-        
+        return $this->redditNode->
+                getElementsByTagName("a")->
+                item(1)->
+                nodeValue;
     }
     
     public function getURL(){
         
-        return $this->URL;
+        $url = $this->redditNode->
+                getElementsByTagName("a")->
+                item(1)->getAttributeNode("href")->
+                value;
         
+        if (!preg_match('/^(http|https)/', $url)) {
+            $url = "http://www.reddit.com" . $url;
+        }
+        
+        return $url;
     }
     
 }
