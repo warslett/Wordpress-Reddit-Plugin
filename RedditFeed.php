@@ -37,14 +37,16 @@ class RedditFeed {
         foreach ($headlinestable->childNodes as $child) {
 
             if ($child->textContent != NULL &&
-                    $child->
-                    getElementsByTagName("a")->
-                    item(1)->
+                            $child->
+                            getElementsByTagName("a")->
+                            item(1)->
                     nodeValue != "random subreddit"
             ) {
                 array_push($this->headlines, new RedditHeadline($child));
             }
         }
+
+        usort($this->headlines, "compareHeadlines");
     }
 
     public function getHeadlines() {
@@ -61,10 +63,15 @@ class RedditFeed {
             $output .= '</a></li>';
             $output .= "\n";
         }
-        
+
         $output .= "</ol>";
 
         return $output;
     }
 
+}
+
+// For comparing headlines for usort (inbuilt quicksort for objects)
+function compareHeadlines($hl1, $hl2) {
+    return $hl2->getRating() - $hl1->getRating();
 }

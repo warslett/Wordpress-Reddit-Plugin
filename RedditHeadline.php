@@ -42,4 +42,11 @@ class RedditHeadline {
         return $url;
     }
     
+    public function getRating(){
+        return intval($this->redditNode->
+                getElementsByTagName("div")->
+                item(3)->
+                nodeValue);
+    }
+    
 }
