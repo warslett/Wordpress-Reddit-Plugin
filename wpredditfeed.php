@@ -18,9 +18,9 @@ function super_plugin_install() {
 register_activation_hook(__FILE__, 'super_plugin_install');
 
 function feed_insert($content) {
-    if (preg_match('/\{REDDIT*.+\}/', $content)) {
+    if (preg_match('/\[redditlatest*.+\]/', $content)) {
         $feed = new RedditFeed;
-        $content = preg_replace('/\{REDDIT*.+\}/', $feed->getHeadlines(), $content);
+        $content = preg_replace('/\[redditlatest*.+\]/', $feed->getHeadlines(), $content);
     }
     return $content;
 }
