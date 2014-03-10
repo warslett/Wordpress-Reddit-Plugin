@@ -58,7 +58,7 @@ class RedditFeed {
 
             $output .= '<li><a href="';
             $output .= $headline->getURL();
-            $output .= '">';
+            $output .= '" target="_blank">';
             $output .= $headline->getLabel();
             $output .= '</a></li>';
             $output .= "\n";
