@@ -17,20 +17,31 @@ class RedditHeadline {
         
     }
     
+    private function getLinkNode(){
+        
+        $link = $this->redditNode->
+                getElementsByTagName("a")->
+                item(0);
+        
+        if(preg_match('/^thumbnail/', $link->getAttributeNode("class")->value)){
+            $link = $this->redditNode->
+                getElementsByTagName("a")->
+                item(1);
+        }
+        
+        return $link;
+        
+    }
+    
     public function getLabel(){
         
-        return $this->redditNode->
-                getElementsByTagName("a")->
-                item(1)->
-                nodeValue;
+        return $this->getLinkNode()->nodeValue;
+        
     }
     
     public function getURL(){
         
-        $url = $this->redditNode->
-                getElementsByTagName("a")->
-                item(1)->getAttributeNode("href")->
-                value;
+        $url = $this->getLinkNode()->getAttributeNode("href")->value;
         
         /* if the URL is relative as opposed to absolute we have to prefix the
          * reddit url so that it links correctly on this site.
@@ -40,13 +51,16 @@ class RedditHeadline {
         }
         
         return $url;
+        
     }
     
     public function getRating(){
+        
         return intval($this->redditNode->
                 getElementsByTagName("div")->
                 item(3)->
                 nodeValue);
+        
     }
     
 }
