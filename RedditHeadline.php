@@ -19,10 +19,13 @@ class RedditHeadline {
     
     private function getLinkNode(){
         
+        //if the headline has no thumbnail use the first link
         $link = $this->redditNode->
                 getElementsByTagName("a")->
                 item(0);
         
+        
+        //otherwise use the second link
         if(preg_match('/^thumbnail/', $link->getAttributeNode("class")->value)){
             $link = $this->redditNode->
                 getElementsByTagName("a")->
